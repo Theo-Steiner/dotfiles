@@ -4,4 +4,6 @@
 /.config/*
 !.config/nvim
 !.config/nvim/**/*
+!.config/iterm2
+!.config/iterm2/theosProfile.json
 !.zshrc
