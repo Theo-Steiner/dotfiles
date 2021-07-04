@@ -8,7 +8,8 @@ set smartindent
 set termguicolors
 set background=dark
 set cb=unnamed
-let g:NERDTreeGitStatusUseNerdFonts = 1 " you should install nerdfonts by yourself. default: 0
+set encoding=UTF-8
+set guifont=Hack\ Nerd\ Font
 
 call plug#begin('~/.vim/plugged')
 Plug 'nvim-lua/popup.nvim'
@@ -18,6 +19,7 @@ Plug 'overcache/NeoSolarized'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'itchyny/lightline.vim'
 Plug 'preservim/nerdtree' |
             \ Plug 'Xuyuanp/nerdtree-git-plugin' |
             \ Plug 'ryanoasis/vim-devicons'
@@ -27,8 +29,29 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'codechips/coc-svelte', {'do': 'npm install'}
 call plug#end()
 
+" you should install nerdfonts by yourself. default: 0
+let g:NERDTreeGitStatusUseNerdFonts = 1
+" enable line numbers
+let NERDTreeShowLineNumbers=1
+" make sure relative line numbers are used
+autocmd FileType nerdtree setlocal relativenumber
+
 let g:neosolarized_contrast = "high"
 colorscheme NeoSolarized
+
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ 'background' : 'dark',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+	  \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
+      \ }
 
 let mapleader=" "
       
