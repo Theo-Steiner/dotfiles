@@ -1,4 +1,6 @@
 {
+  "diagnostic.checkCurrentLine": true,
   "coc.preferences.formatOnSaveFiletypes": ["*"],
+  "coc.preferences.extensionUpdateCheck": "daily",
   "suggest.noselect": false
 }
