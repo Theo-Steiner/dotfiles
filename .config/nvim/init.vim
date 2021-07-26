@@ -18,7 +18,7 @@ Plug 'overcache/NeoSolarized'
 " get the current context inside a file - eg. current html / css / js,ts section in svelte
 " necessary for proper comment toggling
 Plug 'shougo/context_filetype.vim'
-
+"
 " comment plugin || toggle comment with <leader> c
 Plug 'tyru/caw.vim'
 
@@ -69,6 +69,26 @@ autocmd FileType nerdtree setlocal relativenumber
 " configure and set colorscheme
 let g:neosolarized_contrast = "high"
 colorscheme NeoSolarized
+
+" configure context_filetype.vim for svelte
+if !exists('g:context_filetype#same_filetypes')
+  let g:context_filetype#filetypes = {}
+endif
+let g:context_filetype#filetypes.svelte =
+\ [
+\   {
+\    'start': '',
+\    'end': '',
+\    'filetype': 'html',
+\   },
+\   {'filetype' : 'javascript', 'start' : '<script \?.*>', 'end' : '</script>'},
+\   {
+\     'filetype': 'typescript',
+\     'start': '<script\%( [^>]*\)\? \%(ts\|lang="\%(ts\|typescript\)"\)\%( [^>]*\)\?>',
+\     'end': '',
+\   },
+\   {'filetype' : 'css', 'start' : '<style \?.*>', 'end' : '</style>'},
+\ ]
 
 " settings for lightline (powerline symbols as separator/subseparator)
 let g:lightline = {
