@@ -1,15 +1,33 @@
+" scroll screen 8 lines before the cursor hits the edge
 set scrolloff=8
+" activate linenumbers
 set number
+" make linenumbers relative to cursor position
 set relativenumber
+" preferences for how stuff should be indented
 set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
 set smartindent
+" enable iTerm colors
 set termguicolors
+" for my eyes
 set background=dark
+" set clipboard to mac/windows system clipboard
 set cb=unnamed
+" because languages
 set encoding=UTF-8
+" Font that makes NERDTree look nice and adds Powerline icons
 set guifont=Hack\ Nerd\ Font
+
+" specifies the language servers coc should install/ check for on vim startup
+let g:coc_global_extensions = [
+                  \ 'coc-prettier',
+                  \ 'coc-tsserver',
+                  \ 'coc-svelte',
+                  \ 'coc-json',
+                  \ 'coc-css',
+                  \ 'coc-html']
 
 call plug#begin('~/.vim/plugged')
 " pretty theme
@@ -48,12 +66,11 @@ Plug 'ap/vim-css-color'
 Plug 'sheerun/vim-polyglot'
 
 " coc allows for the use of vs-code language server protocols in nvim
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" temporarily use coc-svelte-kit I hosted on npm to support new syntax
-" Plug 'codechips/coc-svelte', {'do': 'npm install'}
-
+" 'do' installs all coc extensions specified in coc_global_extensions variable
+Plug 'neoclide/coc.nvim', {'branch': 'release','do': { -> coc#util#install() }}
 call plug#end()
+
+
 
 " enable typescript highlighting in svelte files 
 " || vim-svelte-plugin is installed through vim polyglot ||
