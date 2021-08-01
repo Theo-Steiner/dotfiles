@@ -93,11 +93,6 @@ if !exists('g:context_filetype#same_filetypes')
 endif
 let g:context_filetype#filetypes.svelte =
 \ [
-\   {
-\    'start': '',
-\    'end': '',
-\    'filetype': 'html',
-\   },
 \   {'filetype' : 'javascript', 'start' : '<script \?.*>', 'end' : '</script>'},
 \   {
 \     'filetype': 'typescript',
@@ -105,6 +100,11 @@ let g:context_filetype#filetypes.svelte =
 \     'end': '',
 \   },
 \   {'filetype' : 'css', 'start' : '<style \?.*>', 'end' : '</style>'},
+\   {
+\    'start': '',
+\    'end': '',
+\    'filetype': 'html',
+\   },
 \ ]
 
 " settings for lightline (powerline symbols as separator/subseparator)
