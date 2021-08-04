@@ -26,7 +26,8 @@ let g:coc_global_extensions = [
                   \ 'coc-tsserver',
                   \ 'coc-svelte',
                   \ 'coc-json',
-                  \ 'coc-css',
+                  \ 'coc-css',      
+                  \ 'coc-eslint',      
                   \ 'coc-html']
 
 call plug#begin('~/.vim/plugged')
@@ -97,7 +98,7 @@ let g:context_filetype#filetypes.svelte =
 \   {
 \     'filetype': 'typescript',
 \     'start': '<script\%( [^>]*\)\? \%(ts\|lang="\%(ts\|typescript\)"\)\%( [^>]*\)\?>',
-\     'end': '',
+\     'end': '</script>',
 \   },
 \   {'filetype' : 'css', 'start' : '<style \?.*>', 'end' : '</style>'},
 \   {
