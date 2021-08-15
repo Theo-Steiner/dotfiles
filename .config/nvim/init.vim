@@ -129,14 +129,15 @@ let g:lightline = {
 	  \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
       \ }
 
-" get the path relative to the git repo to add it to the status line
+" get the path relative to the git repo to add it to the status line.
+" If window is too small, file and parent directory are shown instead.
 function! GetCurrentGitPath()
   let root = fnamemodify(get(b:, 'git_dir'), ':h')
   let path = expand('%:p')
   if path[:len(root)-1] ==# root
-    return path[len(root)+1:]
+      return winwidth(0) < 120 ? remove(split(expand("%:h"), "/"), -1) . "/" . expand("%:t") : path[len(root)+1:] 
   endif
-  return expand('%')
+  return remove(split(expand("%:h"), "/"), -1) . "/" . expand("%:t") 
 endfunction
 
 " Use git gutter to check if changes have been made since the last git commit
