@@ -44,11 +44,17 @@ Plug 'tyru/caw.vim'
 " legendary git plugin
 Plug 'tpope/vim-fugitive'
 
+" git gutter shows changed lines in the sign column
+Plug 'airblade/vim-gitgutter'
+
 " surround selected code, mapped to shift-S
 Plug 'tpope/vim-surround'
 
 " sexy lightline plugin
 Plug 'itchyny/lightline.vim'
+
+" add git hunks to lightline
+Plug 'sinetoami/lightline-hunks'
 
 " telescope fuzzy finder <space> ff to FindFiles and <space> fg to LiveGrep
 Plug 'nvim-lua/popup.nvim'
@@ -70,9 +76,6 @@ Plug 'sheerun/vim-polyglot'
 " 'do' installs all coc extensions specified in coc_global_extensions variable
 Plug 'neoclide/coc.nvim', {'branch': 'release','do': { -> coc#util#install() }}
 call plug#end()
-
-
-
 " enable typescript highlighting in svelte files 
 " || vim-svelte-plugin is installed through vim polyglot ||
 let g:vim_svelte_plugin_use_typescript = 1
@@ -102,27 +105,56 @@ let g:context_filetype#filetypes.svelte =
 \   },
 \   {'filetype' : 'css', 'start' : '<style \?.*>', 'end' : '</style>'},
 \   {
+\    'filetype': 'html',
 \    'start': '',
 \    'end': '',
-\    'filetype': 'html',
 \   },
 \ ]
 
-" settings for lightline (powerline symbols as separator/subseparator)
+" settings for lightline (powerline symbols as separator/subseparator +
+" display relative filepath + show gitbranch && git hunks)
 let g:lightline = {
-      \ 'colorscheme': 'solarized',
+      \ 'colorscheme': 'customized_solarized',
       \ 'background' : 'dark',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \             [ 'lightline_hunks'], 
+      \             ['readonly', 'filename', 'modified' ] ]
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead'
+      \   'filename': 'GetCurrentGitPath',
+      \   'lightline_hunks': 'lightline#hunks#composer',
       \ },
       \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
 	  \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
       \ }
 
+" get the path relative to the git repo to add it to the status line
+function! GetCurrentGitPath()
+  let root = fnamemodify(get(b:, 'git_dir'), ':h')
+  let path = expand('%:p')
+  if path[:len(root)-1] ==# root
+    return path[len(root)+1:]
+  endif
+  return expand('%')
+endfunction
+
+" Use git gutter to check if changes have been made since the last git commit
+" and change the Git part of the statusline color to yellow if dirty
+function! GitColorAndHunks()
+  let hunks = GitGutterGetHunkSummary()
+  let l:palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
+  if hunks[0] == 0 && hunks[1] == 0 && hunks[2] == 0
+     let l:palette.normal.left[1][1] = '#859900'
+  else
+     let l:palette.normal.left[1][1] = '#b58900'
+  endif
+  call lightline#colorscheme()
+endfunction
+   
+autocmd BufWritePost * call GitColorAndHunks() 
+
+"
 " set leader to <space>
 let mapleader=" "
       
@@ -150,8 +182,11 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR
 " configure tab to go down the auto selections and shift tab to go up
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" jump to definition
+nmap <silent> gd <Plug>(coc-definition)
 
 " trigger prettier formatting by <leader> p
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 vmap <leader>p <Plug>(coc-format-selected)
 nmap <leader>p <Plug>(coc-format-selected)
+
