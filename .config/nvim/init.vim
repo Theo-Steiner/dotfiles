@@ -20,6 +20,8 @@ set encoding=UTF-8
 " Font that makes NERDTree look nice and adds Powerline icons
 set guifont=Hack\ Nerd\ Font
 
+set hidden
+
 " specifies the language servers coc should install/ check for on vim startup
 let g:coc_global_extensions = [
                   \ 'coc-prettier',
@@ -185,6 +187,18 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " jump to definition
 nmap <silent> gd <Plug>(coc-definition)
+" show type information in popup window
+nmap <silent> gt :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction 
 
 " trigger prettier formatting by <leader> p
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
