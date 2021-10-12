@@ -17,13 +17,14 @@ set background=dark
 set cb=unnamed
 " because languages
 set encoding=UTF-8
-" Font that makes NERDTree look nice and adds Powerline icons
+" Font that makes Coc-Explorer look nice and adds Powerline icons
 set guifont=Hack\ Nerd\ Font
 
 set hidden
 
-" specifies the language servers coc should install/ check for on vim startup
+" specifies the addons language servers coc should install/ check for on vim startup
 let g:coc_global_extensions = [
+                  \ 'coc-explorer',
                   \ 'coc-prettier',
                   \ 'coc-tsserver',
                   \ 'coc-svelte',
@@ -63,11 +64,6 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
-" file-tree plugin. mapped to <leader> pv
-Plug 'preservim/nerdtree' |
-            \ Plug 'Xuyuanp/nerdtree-git-plugin' |
-            \ Plug 'ryanoasis/vim-devicons'
-
 " preview for css colors inline
 Plug 'ap/vim-css-color'
 
@@ -81,13 +77,6 @@ call plug#end()
 " enable typescript highlighting in svelte files 
 " || vim-svelte-plugin is installed through vim polyglot ||
 let g:vim_svelte_plugin_use_typescript = 1
-
-" enable nerdfonts in file tree for prettier looks
-let g:NERDTreeGitStatusUseNerdFonts = 1
-" enable line numbers in file tree
-let NERDTreeShowLineNumbers=1
-" make sure relative line numbers are used
-autocmd FileType nerdtree setlocal relativenumber
 
 " configure and set colorscheme
 let g:neosolarized_contrast = "high"
@@ -137,9 +126,9 @@ function! GetCurrentGitPath()
   let root = fnamemodify(get(b:, 'git_dir'), ':h')
   let path = expand('%:p')
   if path[:len(root)-1] ==# root
-      return winwidth(0) < 120 ? remove(split(expand("%:h"), "/"), -1) . "/" . expand("%:t") : path[len(root)+1:] 
+    return path[len(root)+1:]
   endif
-  return remove(split(expand("%:h"), "/"), -1) . "/" . expand("%:t") 
+  return expand('%')
 endfunction
 
 " Use git gutter to check if changes have been made since the last git commit
@@ -164,9 +153,6 @@ let mapleader=" "
 " paste over selected content no longer replaces clipboard
 vnoremap p "_dP
 
-" open file tree with <leader> pv
-nnoremap <leader>pv :NERDTreeFind<CR>
-
 " source vim config with <leader> enter
 nnoremap <leader><CR> :so ~/.config/nvim/init.vim<CR>
 
@@ -179,6 +165,12 @@ nnoremap <leader>fs <cmd>Telescope git_status<cr>
 
 " <space> c toggles the current line or current selection to be a comment
 map <leader>c <Plug>(caw:hatpos:toggle)
+
+" have vim start coc-explorer if vim started with folder
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'CocCommand explorer' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+" open file tree with <leader> pv
+nnoremap <leader>pv <Cmd>CocCommand explorer<CR> 
 
 " enter on coc autocomplete suggestion selects first item
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
@@ -199,9 +191,3 @@ function! s:show_documentation()
     execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction 
-
-" trigger prettier formatting by <leader> p
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-vmap <leader>p <Plug>(coc-format-selected)
-nmap <leader>p <Plug>(coc-format-selected)
-

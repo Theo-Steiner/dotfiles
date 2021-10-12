@@ -14,5 +14,18 @@
     "vue",
     "markdown"
   ],
-  "svelte.enable-ts-plugin": true
+  "svelte.enable-ts-plugin": true,
+  "explorer.width": 30,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.keyMappings.global": {
+    "<cr>": [
+      "wait",
+      "expandable?",
+      ["expanded?", "collapse", "expand"],
+      "open"
+    ],
+    "l": false,
+    "h": false,
+    "e": false
+  }
 }
