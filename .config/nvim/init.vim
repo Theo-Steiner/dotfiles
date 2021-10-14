@@ -73,6 +73,10 @@ Plug 'sheerun/vim-polyglot'
 " coc allows for the use of vs-code language server protocols in nvim
 " 'do' installs all coc extensions specified in coc_global_extensions variable
 Plug 'neoclide/coc.nvim', {'branch': 'release','do': { -> coc#util#install() }}
+
+" devicons for telescope && coc-explorer
+Plug 'kyazdani42/nvim-web-devicons'
+
 call plug#end()
 " enable typescript highlighting in svelte files 
 " || vim-svelte-plugin is installed through vim polyglot ||
