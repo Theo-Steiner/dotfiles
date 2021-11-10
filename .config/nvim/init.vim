@@ -22,8 +22,13 @@ set encoding=UTF-8
 " Font that makes Coc-Explorer look nice and adds Powerline icons
 set guifont=Hack\ Nerd\ Font
 
-set background=dark
+" Change color and always display sign column:
+highlight! link SignColumn LineNr
+set signcolumn="yes"
+" Change color of VerticalSplit
+highlight VertSplit cterm=NONE
 
+" hides 'No write since last change (add ! to override)' error
 set hidden
 
 " specifies the addons language servers coc should install/ check for on vim startup
@@ -78,13 +83,22 @@ Plug 'neoclide/coc.nvim', {'branch': 'release','do': { -> coc#util#install() }}
 Plug 'kyazdani42/nvim-web-devicons'
 
 call plug#end()
-
-let g:airline_theme='base16'
+" Theme that looks okay on different themes
+let g:airline_theme='bubblegum'
+hi StatusLine ctermfg=238
+hi StatusLineNC ctermfg=238
+" Use separator and git symbols
 let g:airline_powerline_fonts = 1
+" No separators for empty sections
+let g:airline_skip_empty_sections = 1
+" Hide sections I don't want to see
+let g:airline_section_y = 0
+let g:airline_section_warning = 0
 
 " enable typescript highlighting in svelte files 
 " || vim-svelte-plugin is installed through vim polyglot ||
 let g:vim_svelte_plugin_use_typescript = 1
+
 " configure context_filetype.vim for svelte
 if !exists('g:context_filetype#same_filetypes')
   let g:context_filetype#filetypes = {}

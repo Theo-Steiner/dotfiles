@@ -1,6 +1,8 @@
 *
 !.gitignore
 !/.config
+!/.warp
+!/.warp/**/*
 /.config/*
 !.config/nvim
 !.config/nvim/**/*
