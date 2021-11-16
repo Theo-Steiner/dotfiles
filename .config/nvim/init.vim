@@ -22,6 +22,10 @@ set encoding=UTF-8
 " Font that makes Coc-Explorer look nice and adds Powerline icons
 set guifont=Hack\ Nerd\ Font
 
+" Highlight the line currently selected by making the text bold
+set cursorline
+hi CursorLine term=bold cterm=bold
+
 " Change color and always display sign column:
 highlight! link SignColumn LineNr
 set signcolumn="yes"
