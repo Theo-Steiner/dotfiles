@@ -35,12 +35,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 
 " statusline
-Plug 'vim-airline/vim-airline'
-" themes
-Plug 'vim-airline/vim-airline-themes'
-
-" airline colortheme that only uses cterm colors
-Plug 'bohlender/vim-airline-cterm16'
+Plug 'nvim-lualine/lualine.nvim'
 
 " telescope fuzzy finder <space> ff to FindFiles and <space> fg to LiveGrep
 Plug 'nvim-lua/popup.nvim'
@@ -100,7 +95,6 @@ set hidden
 "
 " set colorscheme to dim
 syntax on
-set background=dark
 colorscheme dim
 
 " Highlight the line currently selected by making the text bold
@@ -115,15 +109,28 @@ set signcolumn="yes"
 highlight VertSplit ctermfg=NONE ctermbg=NONE cterm=NONE
 highlight SignColumn ctermfg=NONE ctermbg=NONE cterm=NONE
 
-" Use powerline separator and git symbols
-let g:airline_powerline_fonts = 1
-" No separators for empty sections
-let g:airline_skip_empty_sections = 1
-" Hide sections I don't want to see
-let g:airline_section_y = 0
-let g:airline_section_warning = 0
-" Theme that looks okay on different themes
-
+" Customize lualine
+hi StatusLine ctermfg=NONE ctermbg=NONE cterm=NONE
+hi StatusLineNC ctermfg=NONE ctermbg=NONE cterm=NONE
+lua << END
+local custom_auto = require'lualine.themes.auto'
+-- Change the background of lualine_c section to NONE for all modes
+custom_auto.normal.c.bg = NONE
+custom_auto.visual.c.bg = NONE
+custom_auto.insert.c.bg = NONE
+custom_auto.command.c.bg = NONE
+-- Change the background of lualine_b section to NONE for all modes
+custom_auto.normal.b.bg = NONE 
+custom_auto.visual.b.bg = NONE
+custom_auto.insert.b.bg = NONE
+custom_auto.command.b.bg = NONE
+require'lualine'.setup  {
+    options = {
+        theme = custom_auto,
+        component_separators = { left = '', right = ''},
+    }
+}
+END
 
 " ****************************************
 " ********* SETTINGS FOR PLUGINS *********
