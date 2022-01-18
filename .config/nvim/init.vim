@@ -200,6 +200,29 @@ nmap <silent> gr <Plug>(coc-type-definition)
 " show type information in popup window
 nmap <silent> gt :call <SID>show_documentation()<CR>
 
+" open diagnostics in a local list
+nmap <silent> ge <Cmd>CocDiagnostics<CR> 
+
+" navigate quickfixlist or location list using C-n and C-p
+nnoremap <C-p> :call <SID>qfnavigation(v:false)<CR>
+nnoremap <C-n> :call <SID>qfnavigation(v:true)<CR>
+
+function! s:qfnavigation(next) abort
+    " find all 'quickfix'-type windows on the current tab
+    let qfwin = filter(getwininfo(), {_, v -> v.quickfix && v.tabnr == tabpagenr()})
+    if !empty(qfwin)
+        " using the first one found
+        if qfwin[0].winid == getqflist({'nr': 0, 'winid': 0}).winid
+            " it's quickfix
+            execute a:next ? 'cnext' : 'cprev'
+        else
+            " assume it's loclist
+            " must execute it in the host window or in loclist itself
+            call win_execute(qfwin[0].winid, a:next ? 'lnext' : 'lprev', '')
+        endif
+    endif
+endfunction
+
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')

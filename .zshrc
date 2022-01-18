@@ -1,8 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-plugins=(git)
 
-source $ZSH/oh-my-zsh.sh
+alias vic="cd && cd .config/nvim/ && vi init.vim"
 alias vim="nvim"
 alias vi="nvim"
 alias oldvim="\vim"
