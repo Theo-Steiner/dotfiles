@@ -18,6 +18,8 @@ call plug#begin('~/.vim/plugged')
 " colortheme that only uses 16 ansi colors
 Plug 'jeffkreeftmeijer/vim-dim'
 
+" Github Copilot
+Plug 'github/copilot.vim'
 " get the current context inside a file - eg. current html / css / js,ts section in svelte
 " necessary for proper comment toggling
 Plug 'shougo/context_filetype.vim'
@@ -41,6 +43,9 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+
+" Treesitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " preview for css colors inline
 Plug 'ap/vim-css-color'
@@ -103,7 +108,8 @@ hi CursorLine term=bold cterm=bold
 
 " Change color and always display sign column:
 highlight! link SignColumn LineNr
-set signcolumn="yes"
+" signcolumn not available for some reason?
+" set signcolumn="yes"
 
 " Make VerticalSplit thin and non-ugly
 highlight VertSplit ctermfg=NONE ctermbg=NONE cterm=NONE
