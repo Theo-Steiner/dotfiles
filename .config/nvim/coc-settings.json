@@ -18,6 +18,7 @@
   "explorer.width": 30,
   "explorer.icon.enableNerdfont": true,
   "explorer.icon.source": "nvim-web-devicons",
+  "explorer.file.showHiddenFiles": true,
   "explorer.keyMappings.global": {
     "<cr>": [
       "wait",
