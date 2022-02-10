@@ -1,0 +1,4 @@
+---
+"editor_view:insert_autosuggestion_text_and_update_selection": ctrl-enter
+"editor_view:accept_autosuggestion": shift-tab
+"workspace:show_theme_chooser": cmd-s

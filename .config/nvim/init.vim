@@ -72,6 +72,15 @@ set scrolloff=8
 " activate linenumbers
 set number
 
+" remember folds for files that contain a dot (.) in their name
+" a new fold is made with visual line mode and then <za>
+set foldmethod=manual
+augroup remember_folds
+  autocmd!
+  autocmd BufWinLeave *.* mkview
+  autocmd BufWinEnter *.* silent! loadview
+augroup END
+
 " make linenumbers relative to cursor position
 set relativenumber
 
@@ -108,12 +117,18 @@ hi CursorLine term=bold cterm=bold
 
 " Change color and always display sign column:
 highlight! link SignColumn LineNr
+highlight GitGutterAdd ctermfg=2 ctermbg=NONE
+highlight GitGutterChange ctermfg=3 ctermbg=NONE
+highlight GitGutterDelete ctermfg=1 ctermbg=NONE
+highlight GitGutterChangeDelete ctermfg=4 ctermbg=NONE
 " signcolumn not available for some reason?
 " set signcolumn="yes"
 
 " Make VerticalSplit thin and non-ugly
 highlight VertSplit ctermfg=NONE ctermbg=NONE cterm=NONE
 highlight SignColumn ctermfg=NONE ctermbg=NONE cterm=NONE
+
+hi Folded ctermbg=NONE
 
 " Customize lualine
 hi StatusLine ctermfg=NONE ctermbg=NONE cterm=NONE
@@ -130,10 +145,55 @@ custom_auto.normal.b.bg = NONE
 custom_auto.visual.b.bg = NONE
 custom_auto.insert.b.bg = NONE
 custom_auto.command.b.bg = NONE
+-- make section c font bold
+custom_auto.normal.c.gui = 'bold'
+custom_auto.visual.c.gui = 'bold'
+custom_auto.insert.c.gui = 'bold'
+custom_auto.command.c.gui = 'bold'
+
+-- a utility to trim the path if it is longer than 45 characters
+function format_path(str) 
+    if string.len(str) < 45 then
+        return str
+    end
+    s = {}
+    for i in string.gmatch(str, "([^/]+)") do
+       table.insert(s,i)
+    end
+    res = ""
+    for i=1, #s do
+       if i < 3 then
+          res = "/" .. s[#s + 1 - i] ..  res
+       else
+         return "..." .. res
+       end
+    end
+    return "..." .. res
+end
+
+local utils = require('lualine.utils.utils')
 require'lualine'.setup  {
     options = {
         theme = custom_auto,
         component_separators = { left = '', right = ''},
+    },
+    sections = {
+        lualine_c = {
+        }, 
+        lualine_x = {
+            {
+                'filetype',
+                icon_only = true,
+                padding = 0,
+                separator = '', 
+            },
+            {
+                'filename',
+                color = {gui = 'bold', fg = utils.extract_color_from_hllist('fg', { 'Special', 'Boolean', 'Constant' }, '#000000'), } ,
+                path = 1, -- 1: relative path
+                fmt = format_path,
+            }
+        },
     }
 }
 END
