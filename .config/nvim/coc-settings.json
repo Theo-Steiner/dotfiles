@@ -1,5 +1,6 @@
 {
   "diagnostic.checkCurrentLine": true,
+  "prettier.formatterPriority": -1,
   "coc.preferences.formatOnSaveFiletypes": ["*"],
   "coc.preferences.extensionUpdateCheck": "daily",
   "suggest.noselect": false,
@@ -18,6 +19,7 @@
   "explorer.width": 30,
   "explorer.icon.enableNerdfont": true,
   "explorer.icon.source": "nvim-web-devicons",
+  "explorer.file.showHiddenFiles": true,
   "explorer.keyMappings.global": {
     "<cr>": [
       "wait",

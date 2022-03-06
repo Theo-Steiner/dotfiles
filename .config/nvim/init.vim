@@ -1,27 +1,8 @@
-" scroll screen 8 lines before the cursor hits the edge
-set scrolloff=8
-" activate linenumbers
-set number
-" make linenumbers relative to cursor position
-set relativenumber
-" preferences for how stuff should be indented
-set tabstop=4 softtabstop=4
-set shiftwidth=4
-set expandtab
-set smartindent
-" enable iTerm colors
-set termguicolors
-" for my eyes
-set background=dark
-" set clipboard to mac/windows system clipboard
-set cb=unnamed
-" because languages
-set encoding=UTF-8
-" Font that makes Coc-Explorer look nice and adds Powerline icons
-set guifont=Hack\ Nerd\ Font
-
-set hidden
-
+" THEO'S NVIM CONFIG FOR THE WARP TERMINAL
+" ****************************************
+" ************ CALL VIM PLUG *************
+" ****************************************
+"
 " specifies the addons language servers coc should install/ check for on vim startup
 let g:coc_global_extensions = [
                   \ 'coc-explorer',
@@ -34,13 +15,15 @@ let g:coc_global_extensions = [
                   \ 'coc-html']
 
 call plug#begin('~/.vim/plugged')
-" pretty theme
-Plug 'overcache/NeoSolarized'
+" colortheme that only uses 16 ansi colors
+Plug 'jeffkreeftmeijer/vim-dim'
 
+" Github Copilot
+Plug 'github/copilot.vim'
 " get the current context inside a file - eg. current html / css / js,ts section in svelte
 " necessary for proper comment toggling
 Plug 'shougo/context_filetype.vim'
-"
+
 " comment plugin || toggle comment with <leader> c
 Plug 'tyru/caw.vim'
 
@@ -53,16 +36,16 @@ Plug 'airblade/vim-gitgutter'
 " surround selected code, mapped to shift-S
 Plug 'tpope/vim-surround'
 
-" sexy lightline plugin
-Plug 'itchyny/lightline.vim'
-
-" add git hunks to lightline
-Plug 'sinetoami/lightline-hunks'
+" statusline
+Plug 'nvim-lualine/lualine.nvim'
 
 " telescope fuzzy finder <space> ff to FindFiles and <space> fg to LiveGrep
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+
+" Treesitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " preview for css colors inline
 Plug 'ap/vim-css-color'
@@ -76,15 +59,154 @@ Plug 'neoclide/coc.nvim', {'branch': 'release','do': { -> coc#util#install() }}
 
 " devicons for telescope && coc-explorer
 Plug 'kyazdani42/nvim-web-devicons'
-
 call plug#end()
+
+
+" ****************************************
+" ********** BASIC VIM SETTINGS **********
+" ****************************************
+"
+" scroll screen 8 lines before the cursor hits the edge
+set scrolloff=8
+
+" activate linenumbers
+set number
+
+" remember folds for files that contain a dot (.) in their name
+" a new fold is made with visual line mode and then <za>
+set foldmethod=manual
+augroup remember_folds
+  autocmd!
+  autocmd BufWinLeave *.* mkview
+  autocmd BufWinEnter *.* silent! loadview
+augroup END
+
+" make linenumbers relative to cursor position
+set relativenumber
+
+" preferences for how stuff should be indented
+set tabstop=4 softtabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
+
+" set clipboard to mac/windows system clipboard
+set cb=unnamed
+
+" because languages
+set encoding=UTF-8
+
+" Font that makes Coc-Explorer look nice and adds Powerline icons
+set guifont=Hack\ Nerd\ Font
+
+" hides 'No write since last change (add ! to override)' error
+set hidden
+
+
+" ****************************************
+" ********* MAKE VIM LOOK PRETTY *********
+" ****************************************
+"
+" set colorscheme to dim
+syntax on
+colorscheme dim
+
+" Highlight the line currently selected by making the text bold
+set cursorline
+hi CursorLine term=bold cterm=bold
+
+" Change color and always display sign column:
+highlight! link SignColumn LineNr
+highlight GitGutterAdd ctermfg=2 ctermbg=NONE
+highlight GitGutterChange ctermfg=3 ctermbg=NONE
+highlight GitGutterDelete ctermfg=1 ctermbg=NONE
+highlight GitGutterChangeDelete ctermfg=4 ctermbg=NONE
+" signcolumn not available for some reason?
+" set signcolumn="yes"
+
+" Make VerticalSplit thin and non-ugly
+highlight VertSplit ctermfg=NONE ctermbg=NONE cterm=NONE
+highlight SignColumn ctermfg=NONE ctermbg=NONE cterm=NONE
+
+hi Folded ctermbg=NONE
+
+" Customize lualine
+hi StatusLine ctermfg=NONE ctermbg=NONE cterm=NONE
+hi StatusLineNC ctermfg=NONE ctermbg=NONE cterm=NONE
+lua << END
+local custom_auto = require'lualine.themes.auto'
+-- Change the background of lualine_c section to NONE for all modes
+custom_auto.normal.c.bg = NONE
+custom_auto.visual.c.bg = NONE
+custom_auto.insert.c.bg = NONE
+custom_auto.command.c.bg = NONE
+-- Change the background of lualine_b section to NONE for all modes
+custom_auto.normal.b.bg = NONE 
+custom_auto.visual.b.bg = NONE
+custom_auto.insert.b.bg = NONE
+custom_auto.command.b.bg = NONE
+-- make section c font bold
+custom_auto.normal.c.gui = 'bold'
+custom_auto.visual.c.gui = 'bold'
+custom_auto.insert.c.gui = 'bold'
+custom_auto.command.c.gui = 'bold'
+
+-- a utility to trim the path if it is longer than 45 characters
+function format_path(str) 
+    if string.len(str) < 45 then
+        return str
+    end
+    s = {}
+    for i in string.gmatch(str, "([^/]+)") do
+       table.insert(s,i)
+    end
+    res = ""
+    for i=1, #s do
+       if i < 3 then
+          res = "/" .. s[#s + 1 - i] ..  res
+       else
+         return "..." .. res
+       end
+    end
+    return "..." .. res
+end
+
+local utils = require('lualine.utils.utils')
+require'lualine'.setup  {
+    options = {
+        theme = custom_auto,
+        component_separators = { left = '', right = ''},
+    },
+    sections = {
+        lualine_c = {
+        }, 
+        lualine_x = {
+            {
+                'filetype',
+                icon_only = true,
+                padding = 0,
+                separator = '', 
+            },
+            {
+                'filename',
+                color = {gui = 'bold', fg = utils.extract_color_from_hllist('fg', { 'Special', 'Boolean', 'Constant' }, '#000000'), } ,
+                path = 1, -- 1: relative path
+                fmt = format_path,
+            }
+        },
+    }
+}
+END
+
+" ****************************************
+" ********* SETTINGS FOR PLUGINS *********
+" ****************************************
+"
+
+
 " enable typescript highlighting in svelte files 
 " || vim-svelte-plugin is installed through vim polyglot ||
 let g:vim_svelte_plugin_use_typescript = 1
-
-" configure and set colorscheme
-let g:neosolarized_contrast = "high"
-colorscheme NeoSolarized
 
 " configure context_filetype.vim for svelte
 if !exists('g:context_filetype#same_filetypes')
@@ -106,51 +228,10 @@ let g:context_filetype#filetypes.svelte =
 \   },
 \ ]
 
-" settings for lightline (powerline symbols as separator/subseparator +
-" display relative filepath + show gitbranch && git hunks)
-let g:lightline = {
-      \ 'colorscheme': 'customized_solarized',
-      \ 'background' : 'dark',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'lightline_hunks'], 
-      \             ['readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'filename': 'GetCurrentGitPath',
-      \   'lightline_hunks': 'lightline#hunks#composer',
-      \ },
-      \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
-	  \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
-      \ }
-
-" get the path relative to the git repo to add it to the status line.
-" If window is too small, file and parent directory are shown instead.
-function! GetCurrentGitPath()
-  let root = fnamemodify(get(b:, 'git_dir'), ':h')
-  let path = expand('%:p')
-  if path[:len(root)-1] ==# root
-    return path[len(root)+1:]
-  endif
-  return expand('%')
-endfunction
-
-" Use git gutter to check if changes have been made since the last git commit
-" and change the Git part of the statusline color to yellow if dirty
-function! GitColorAndHunks()
-  let hunks = GitGutterGetHunkSummary()
-  let l:palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
-  if hunks[0] == 0 && hunks[1] == 0 && hunks[2] == 0
-     let l:palette.normal.left[1][1] = '#859900'
-  else
-     let l:palette.normal.left[1][1] = '#b58900'
-  endif
-  call lightline#colorscheme()
-endfunction
-   
-autocmd BufWritePost * call GitColorAndHunks() 
-
-"
+" ****************************************
+" ************** KEYBINDINGS *************
+" ****************************************
+" 
 " set leader to <space>
 let mapleader=" "
       
@@ -180,8 +261,33 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " jump to definition
 nmap <silent> gd <Plug>(coc-definition)
+" jump to type definition
+nmap <silent> gr <Plug>(coc-type-definition)
 " show type information in popup window
 nmap <silent> gt :call <SID>show_documentation()<CR>
+
+" open diagnostics in a local list
+nmap <silent> ge <Cmd>CocDiagnostics<CR> 
+
+" navigate quickfixlist or location list using C-n and C-p
+nnoremap <C-p> :call <SID>qfnavigation(v:false)<CR>
+nnoremap <C-n> :call <SID>qfnavigation(v:true)<CR>
+
+function! s:qfnavigation(next) abort
+    " find all 'quickfix'-type windows on the current tab
+    let qfwin = filter(getwininfo(), {_, v -> v.quickfix && v.tabnr == tabpagenr()})
+    if !empty(qfwin)
+        " using the first one found
+        if qfwin[0].winid == getqflist({'nr': 0, 'winid': 0}).winid
+            " it's quickfix
+            execute a:next ? 'cnext' : 'cprev'
+        else
+            " assume it's loclist
+            " must execute it in the host window or in loclist itself
+            call win_execute(qfwin[0].winid, a:next ? 'lnext' : 'lprev', '')
+        endif
+    endif
+endfunction
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -192,3 +298,11 @@ function! s:show_documentation()
     execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction 
+
+
+" ****************************************
+" ************* AUTOCOMMANDS *************
+" ****************************************
+"
+" Close coc-explorer if it's the only buffer left open.
+autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
