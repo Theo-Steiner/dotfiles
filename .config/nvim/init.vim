@@ -72,6 +72,13 @@ set scrolloff=8
 " activate linenumbers
 set number
 
+" open coc-explorer rather than netrw
+augroup CocHijackScript
+  autocmd!
+  autocmd VimEnter * sil! au! FileExplorer *
+  autocmd BufEnter * let d = expand('%') | if isdirectory(d) | silent! bd | exe 'CocCommand explorer ' . d | endif
+augroup END
+
 " remember folds for files that contain a dot (.) in their name
 " a new fold is made with visual line mode and then <za>
 set foldmethod=manual
@@ -203,6 +210,16 @@ END
 " ****************************************
 "
 
+
+" Custom svelte surroundings for tpope's vim-surround.
+" in visual mode, hit <shift>-s to enter *vS* mode
+" then hit the corresponding asci character to surround with snippet
+" for await scaffolding: asci-97 => a
+let g:surround_97 = "{#await expression}\r{:then value} {value} {:catch error} {error} {/await}"
+" for each block: asci-101 => e
+let g:surround_101 = "{#each iterable as value}\r{/each}"
+" for if block: asci-105 => i
+let g:surround_105 = "{#if condition}\r{/if}"
 
 " enable typescript highlighting in svelte files 
 " || vim-svelte-plugin is installed through vim polyglot ||
