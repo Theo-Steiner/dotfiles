@@ -255,6 +255,9 @@ let mapleader=" "
 " paste over selected content no longer replaces clipboard
 vnoremap p "_dP
 
+" s can be used for changing all occurences of word under cursor
+:nnoremap s :%s/\<<C-r><C-w>\>//g<Left><Left>
+
 " source vim config with <leader> enter
 nnoremap <leader><CR> :so ~/.config/nvim/init.vim<CR>
 
