@@ -182,6 +182,8 @@ local utils = require('lualine.utils.utils')
 require'lualine'.setup  {
     options = {
         theme = custom_auto,
+        -- Once warpdotdev/Warp/issues/317 is resolved, section_separators can be the default value (,)
+        section_separators = { left = '', right = ''},
         component_separators = { left = '', right = ''},
     },
     sections = {
