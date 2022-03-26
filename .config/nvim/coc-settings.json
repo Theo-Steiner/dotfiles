@@ -1,12 +1,15 @@
 {
     "diagnostic.checkCurrentLine": true,
-    // "prettier.formatterPriority": -1,
+    "prettier.disableLanguages": [
+        "svelte"
+    ],
     "coc.preferences.formatOnSaveFiletypes": [
         "*"
     ],
     "coc.preferences.extensionUpdateCheck": "daily",
     "suggest.noselect": false,
     "eslint.autoFixOnSave": true,
+    "html.autoClosingTags": false,
     "eslint.probe": [
         "javascript",
         "javascriptreact",
