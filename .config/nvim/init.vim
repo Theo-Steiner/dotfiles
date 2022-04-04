@@ -18,23 +18,20 @@ call plug#begin('~/.vim/plugged')
 " colortheme that only uses 16 ansi colors
 Plug 'jeffkreeftmeijer/vim-dim'
 
-" Github Copilot
-Plug 'github/copilot.vim'
-" get the current context inside a file - eg. current html / css / js,ts section in svelte
-" necessary for proper comment toggling
-Plug 'shougo/context_filetype.vim'
-
-" comment plugin || toggle comment with <leader> c
-Plug 'tyru/caw.vim'
+" surround selected code, mapped to shift-S
+Plug 'tpope/vim-surround'
 
 " legendary git plugin
 Plug 'tpope/vim-fugitive'
 
+" comment plugin... lol @tpope
+Plug 'tpope/vim-commentary'
+
+" Github Copilot (secrectly tpope too)
+Plug 'github/copilot.vim'
+
 " git gutter shows changed lines in the sign column
 Plug 'airblade/vim-gitgutter'
-
-" surround selected code, mapped to shift-S
-Plug 'tpope/vim-surround'
 
 " statusline
 Plug 'nvim-lualine/lualine.nvim'
@@ -71,13 +68,6 @@ set scrolloff=8
 
 " activate linenumbers
 set number
-
-" open coc-explorer rather than netrw
-augroup CocHijackScript
-  autocmd!
-  autocmd VimEnter * sil! au! FileExplorer *
-  autocmd BufEnter * let d = expand('%') | if isdirectory(d) | silent! bd | exe 'CocCommand explorer ' . d | endif
-augroup END
 
 " remember folds for files that contain a dot (.) in their name
 " a new fold is made with visual line mode and then <za>
@@ -220,32 +210,26 @@ END
 let g:surround_97 = "{#await expression}\r{:then value} {value} {:catch error} {error} {/await}"
 " for each block: asci-101 => e
 let g:surround_101 = "{#each iterable as value}\r{/each}"
-" for if block: asci-105 => i
+" for if block: asci-105 => 
 let g:surround_105 = "{#if condition}\r{/if}"
 
 " enable typescript highlighting in svelte files 
 " || vim-svelte-plugin is installed through vim polyglot ||
 let g:vim_svelte_plugin_use_typescript = 1
 
-" configure context_filetype.vim for svelte
-if !exists('g:context_filetype#same_filetypes')
-  let g:context_filetype#filetypes = {}
-endif
-let g:context_filetype#filetypes.svelte =
-\ [
-\   {'filetype' : 'javascript', 'start' : '<script \?.*>', 'end' : '</script>'},
-\   {
-\     'filetype': 'typescript',
-\     'start': '<script\%( [^>]*\)\? \%(ts\|lang="\%(ts\|typescript\)"\)\%( [^>]*\)\?>',
-\     'end': '</script>',
-\   },
-\   {'filetype' : 'css', 'start' : '<style \?.*>', 'end' : '</style>'},
-\   {
-\    'filetype': 'html',
-\    'start': '',
-\    'end': '',
-\   },
-\ ]
+" configure comment-string inside svelte
+" OnChangeSvelteSubtype is called automatically by vim-svelte-plugin
+function! OnChangeSvelteSubtype(subtype)
+  if empty(a:subtype) || a:subtype == 'html'
+    setlocal commentstring=<!--%s-->
+    setlocal comments=s:<!--,m:\ \ \ \ ,e:-->
+  elseif a:subtype =~ 'css'
+    setlocal comments=s1:/*,mb:*,ex:*/ commentstring&
+  else
+    setlocal commentstring=//%s
+    setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
+  endif
+endfunction
 
 " ****************************************
 " ************** KEYBINDINGS *************
@@ -271,7 +255,7 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fs <cmd>Telescope git_status<cr>
 
 " <space> c toggles the current line or current selection to be a comment
-map <leader>c <Plug>(caw:hatpos:toggle)
+map <leader>c gcc
 
 " open file tree with <leader> pv
 nnoremap <leader>pv <Cmd>CocCommand explorer<CR> 
