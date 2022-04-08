@@ -69,23 +69,97 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  LuaSnip = {
+    loaded = true,
+    path = "/Users/theosteiner/.local/share/nvim/site/pack/packer/start/LuaSnip",
+    url = "https://github.com/L3MON4D3/LuaSnip"
+  },
+  ["cmp-buffer"] = {
+    loaded = true,
+    path = "/Users/theosteiner/.local/share/nvim/site/pack/packer/start/cmp-buffer",
+    url = "https://github.com/hrsh7th/cmp-buffer"
+  },
+  ["cmp-cmdline"] = {
+    loaded = true,
+    path = "/Users/theosteiner/.local/share/nvim/site/pack/packer/start/cmp-cmdline",
+    url = "https://github.com/hrsh7th/cmp-cmdline"
+  },
+  ["cmp-nvim-lsp"] = {
+    loaded = true,
+    path = "/Users/theosteiner/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
+    url = "https://github.com/hrsh7th/cmp-nvim-lsp"
+  },
+  ["cmp-nvim-lua"] = {
+    loaded = true,
+    path = "/Users/theosteiner/.local/share/nvim/site/pack/packer/start/cmp-nvim-lua",
+    url = "https://github.com/hrsh7th/cmp-nvim-lua"
+  },
+  ["cmp-path"] = {
+    loaded = true,
+    path = "/Users/theosteiner/.local/share/nvim/site/pack/packer/start/cmp-path",
+    url = "https://github.com/hrsh7th/cmp-path"
+  },
+  cmp_luasnip = {
+    loaded = true,
+    path = "/Users/theosteiner/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
+    url = "https://github.com/saadparwaiz1/cmp_luasnip"
+  },
   ["copilot.vim"] = {
     loaded = true,
     path = "/Users/theosteiner/.local/share/nvim/site/pack/packer/start/copilot.vim",
     url = "https://github.com/github/copilot.vim"
   },
+  ["friendly-snippets"] = {
+    loaded = true,
+    path = "/Users/theosteiner/.local/share/nvim/site/pack/packer/start/friendly-snippets",
+    url = "https://github.com/rafamadriz/friendly-snippets"
+  },
   ["gitsigns.nvim"] = {
+    config = { "\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0" },
     loaded = true,
     path = "/Users/theosteiner/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
   },
+  ["lsp-zero.nvim"] = {
+    loaded = true,
+    path = "/Users/theosteiner/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
+    url = "https://github.com/VonHeikemen/lsp-zero.nvim"
+  },
   ["lualine.nvim"] = {
-    config = { "\27LJ\2\n\2\0\1\t\0\v\00156\1\0\0009\1\1\1\18\3\0\0B\1\2\2)\2-\0\1\1\2\0X\1\1€L\0\2\0004\1\0\0007\1\2\0006\1\0\0009\1\3\1\18\3\0\0'\4\4\0B\1\3\4X\4\5€6\5\5\0009\5\6\0056\a\2\0\18\b\4\0B\5\3\1E\4\3\2R\4ù'\1\a\0007\1\b\0)\1\1\0006\2\2\0\21\2\2\0)\3\1\0M\1\19€)\5\3\0\1\4\5\0X\5\v€'\5\t\0006\6\2\0006\a\2\0\21\a\a\0\22\a\0\a!\a\4\a8\6\a\0066\a\b\0&\5\a\0057\5\b\0X\5\4€'\5\n\0006\6\b\0&\5\6\5L\5\2\0O\1í'\1\n\0006\2\b\0&\1\2\1L\1\2\0\b...\6/\bres\5\vinsert\ntable\f([^/]+)\vgmatch\6s\blen\vstring\2‡\6\1\0\14\0&\0Z6\0\0\0'\2\1\0B\0\2\0029\1\2\0009\1\3\0016\2\5\0=\2\4\0019\1\6\0009\1\3\0016\2\5\0=\2\4\0019\1\a\0009\1\3\0016\2\5\0=\2\4\0019\1\b\0009\1\3\0016\2\5\0=\2\4\0019\1\2\0009\1\t\0016\2\5\0=\2\4\0019\1\6\0009\1\t\0016\2\5\0=\2\4\0019\1\a\0009\1\t\0016\2\5\0=\2\4\0019\1\b\0009\1\t\0016\2\5\0=\2\4\0019\1\2\0009\1\3\1'\2\v\0=\2\n\0019\1\6\0009\1\3\1'\2\v\0=\2\n\0019\1\a\0009\1\3\1'\2\v\0=\2\n\0019\1\b\0009\1\3\1'\2\v\0=\2\n\0013\1\f\0007\1\r\0006\1\0\0'\3\14\0B\1\2\0026\2\0\0'\4\15\0B\2\2\0029\2\16\0025\4\23\0005\5\17\0=\0\18\0055\6\19\0=\6\20\0055\6\21\0=\6\22\5=\5\24\0045\5\25\0004\6\0\0=\6\26\0054\6\3\0005\a\27\0>\a\1\0065\a\28\0005\b\29\0009\t\30\1'\v\31\0005\f \0'\r!\0B\t\4\2=\t\31\b=\b\"\a6\b\r\0=\b#\a>\a\2\6=\6$\5=\5%\4B\2\2\1K\0\1\0\rsections\14lualine_x\bfmt\ncolor\f#000000\1\4\0\0\fSpecial\fBoolean\rConstant\afg\30extract_color_from_hllist\1\0\1\bgui\tbold\1\2\1\0\rfilename\tpath\3\1\1\2\3\0\rfiletype\14separator\5\fpadding\3\0\14icon_only\2\14lualine_c\1\0\0\foptions\1\0\0\25component_separators\1\0\2\tleft\bî‚±\nright\bî‚³\23section_separators\1\0\2\tleft\5\nright\5\ntheme\1\0\0\nsetup\flualine\24lualine.utils.utils\16format_path\0\tbold\bgui\6b\fcommand\vinsert\vvisual\tNONE\abg\6c\vnormal\24lualine.themes.auto\frequire\0" },
+    config = { "\27LJ\2\n/\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\20config._lualine\frequire\0" },
     loaded = true,
     path = "/Users/theosteiner/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
+  ["neo-tree.nvim"] = {
+    config = { "\27LJ\2\n/\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\20config._neotree\frequire\0" },
+    loaded = true,
+    path = "/Users/theosteiner/.local/share/nvim/site/pack/packer/start/neo-tree.nvim",
+    url = "https://github.com/nvim-neo-tree/neo-tree.nvim"
+  },
+  ["nui.nvim"] = {
+    loaded = true,
+    path = "/Users/theosteiner/.local/share/nvim/site/pack/packer/start/nui.nvim",
+    url = "https://github.com/MunifTanjim/nui.nvim"
+  },
+  ["nvim-cmp"] = {
+    config = { "\27LJ\2\n+\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\16config._cmp\frequire\0" },
+    loaded = true,
+    path = "/Users/theosteiner/.local/share/nvim/site/pack/packer/start/nvim-cmp",
+    url = "https://github.com/hrsh7th/nvim-cmp"
+  },
+  ["nvim-lsp-installer"] = {
+    loaded = true,
+    path = "/Users/theosteiner/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer",
+    url = "https://github.com/williamboman/nvim-lsp-installer"
+  },
+  ["nvim-lspconfig"] = {
+    loaded = true,
+    path = "/Users/theosteiner/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
+    url = "https://github.com/neovim/nvim-lspconfig"
+  },
   ["nvim-treesitter"] = {
+    config = { "\27LJ\2\n2\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\23config._treesitter\frequire\0" },
     loaded = true,
     path = "/Users/theosteiner/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
@@ -115,15 +189,16 @@ _G.packer_plugins = {
     path = "/Users/theosteiner/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
+  vim = {
+    config = { "\27LJ\2\ni\0\0\3\0\4\0\t6\0\0\0009\0\1\0'\2\2\0B\0\2\0016\0\0\0009\0\1\0'\2\3\0B\0\2\1K\0\1\0&hi Normal guibg=NONE ctermbg=NONE\24colorscheme dracula\bcmd\bvim\0" },
+    loaded = true,
+    path = "/Users/theosteiner/.local/share/nvim/site/pack/packer/start/vim",
+    url = "https://github.com/dracula/vim"
+  },
   ["vim-commentary"] = {
     loaded = true,
     path = "/Users/theosteiner/.local/share/nvim/site/pack/packer/start/vim-commentary",
     url = "https://github.com/tpope/vim-commentary"
-  },
-  ["vim-dim"] = {
-    loaded = true,
-    path = "/Users/theosteiner/.local/share/nvim/site/pack/packer/start/vim-dim",
-    url = "https://github.com/jeffkreeftmeijer/vim-dim"
   },
   ["vim-fugitive"] = {
     loaded = true,
@@ -131,7 +206,7 @@ _G.packer_plugins = {
     url = "https://github.com/tpope/vim-fugitive"
   },
   ["vim-surround"] = {
-    config = { "\27LJ\2\né\1\0\0\2\0\b\0\r6\0\0\0009\0\1\0'\1\3\0=\1\2\0006\0\0\0009\0\1\0'\1\5\0=\1\4\0006\0\0\0009\0\1\0'\1\a\0=\1\6\0K\0\1\0\26{#if condition}\r{/if}\17surround_105&{#each iterable as value}\r{/each}\17surround_101N{#await expression}\r{:then value} {value} {:catch error} {error} {/await}\16surround_97\6g\bvim\0" },
+    config = { "\27LJ\2\n0\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\21config._surround\frequire\0" },
     loaded = true,
     path = "/Users/theosteiner/.local/share/nvim/site/pack/packer/start/vim-surround",
     url = "https://github.com/tpope/vim-surround"
@@ -139,14 +214,34 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: lualine.nvim
-time([[Config for lualine.nvim]], true)
-try_loadstring("\27LJ\2\n\2\0\1\t\0\v\00156\1\0\0009\1\1\1\18\3\0\0B\1\2\2)\2-\0\1\1\2\0X\1\1€L\0\2\0004\1\0\0007\1\2\0006\1\0\0009\1\3\1\18\3\0\0'\4\4\0B\1\3\4X\4\5€6\5\5\0009\5\6\0056\a\2\0\18\b\4\0B\5\3\1E\4\3\2R\4ù'\1\a\0007\1\b\0)\1\1\0006\2\2\0\21\2\2\0)\3\1\0M\1\19€)\5\3\0\1\4\5\0X\5\v€'\5\t\0006\6\2\0006\a\2\0\21\a\a\0\22\a\0\a!\a\4\a8\6\a\0066\a\b\0&\5\a\0057\5\b\0X\5\4€'\5\n\0006\6\b\0&\5\6\5L\5\2\0O\1í'\1\n\0006\2\b\0&\1\2\1L\1\2\0\b...\6/\bres\5\vinsert\ntable\f([^/]+)\vgmatch\6s\blen\vstring\2‡\6\1\0\14\0&\0Z6\0\0\0'\2\1\0B\0\2\0029\1\2\0009\1\3\0016\2\5\0=\2\4\0019\1\6\0009\1\3\0016\2\5\0=\2\4\0019\1\a\0009\1\3\0016\2\5\0=\2\4\0019\1\b\0009\1\3\0016\2\5\0=\2\4\0019\1\2\0009\1\t\0016\2\5\0=\2\4\0019\1\6\0009\1\t\0016\2\5\0=\2\4\0019\1\a\0009\1\t\0016\2\5\0=\2\4\0019\1\b\0009\1\t\0016\2\5\0=\2\4\0019\1\2\0009\1\3\1'\2\v\0=\2\n\0019\1\6\0009\1\3\1'\2\v\0=\2\n\0019\1\a\0009\1\3\1'\2\v\0=\2\n\0019\1\b\0009\1\3\1'\2\v\0=\2\n\0013\1\f\0007\1\r\0006\1\0\0'\3\14\0B\1\2\0026\2\0\0'\4\15\0B\2\2\0029\2\16\0025\4\23\0005\5\17\0=\0\18\0055\6\19\0=\6\20\0055\6\21\0=\6\22\5=\5\24\0045\5\25\0004\6\0\0=\6\26\0054\6\3\0005\a\27\0>\a\1\0065\a\28\0005\b\29\0009\t\30\1'\v\31\0005\f \0'\r!\0B\t\4\2=\t\31\b=\b\"\a6\b\r\0=\b#\a>\a\2\6=\6$\5=\5%\4B\2\2\1K\0\1\0\rsections\14lualine_x\bfmt\ncolor\f#000000\1\4\0\0\fSpecial\fBoolean\rConstant\afg\30extract_color_from_hllist\1\0\1\bgui\tbold\1\2\1\0\rfilename\tpath\3\1\1\2\3\0\rfiletype\14separator\5\fpadding\3\0\14icon_only\2\14lualine_c\1\0\0\foptions\1\0\0\25component_separators\1\0\2\tleft\bî‚±\nright\bî‚³\23section_separators\1\0\2\tleft\5\nright\5\ntheme\1\0\0\nsetup\flualine\24lualine.utils.utils\16format_path\0\tbold\bgui\6b\fcommand\vinsert\vvisual\tNONE\abg\6c\vnormal\24lualine.themes.auto\frequire\0", "config", "lualine.nvim")
-time([[Config for lualine.nvim]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+try_loadstring("\27LJ\2\n2\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\23config._treesitter\frequire\0", "config", "nvim-treesitter")
+time([[Config for nvim-treesitter]], false)
+-- Config for: nvim-cmp
+time([[Config for nvim-cmp]], true)
+try_loadstring("\27LJ\2\n+\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\16config._cmp\frequire\0", "config", "nvim-cmp")
+time([[Config for nvim-cmp]], false)
+-- Config for: vim
+time([[Config for vim]], true)
+try_loadstring("\27LJ\2\ni\0\0\3\0\4\0\t6\0\0\0009\0\1\0'\2\2\0B\0\2\0016\0\0\0009\0\1\0'\2\3\0B\0\2\1K\0\1\0&hi Normal guibg=NONE ctermbg=NONE\24colorscheme dracula\bcmd\bvim\0", "config", "vim")
+time([[Config for vim]], false)
 -- Config for: vim-surround
 time([[Config for vim-surround]], true)
-try_loadstring("\27LJ\2\né\1\0\0\2\0\b\0\r6\0\0\0009\0\1\0'\1\3\0=\1\2\0006\0\0\0009\0\1\0'\1\5\0=\1\4\0006\0\0\0009\0\1\0'\1\a\0=\1\6\0K\0\1\0\26{#if condition}\r{/if}\17surround_105&{#each iterable as value}\r{/each}\17surround_101N{#await expression}\r{:then value} {value} {:catch error} {error} {/await}\16surround_97\6g\bvim\0", "config", "vim-surround")
+try_loadstring("\27LJ\2\n0\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\21config._surround\frequire\0", "config", "vim-surround")
 time([[Config for vim-surround]], false)
+-- Config for: neo-tree.nvim
+time([[Config for neo-tree.nvim]], true)
+try_loadstring("\27LJ\2\n/\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\20config._neotree\frequire\0", "config", "neo-tree.nvim")
+time([[Config for neo-tree.nvim]], false)
+-- Config for: lualine.nvim
+time([[Config for lualine.nvim]], true)
+try_loadstring("\27LJ\2\n/\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\20config._lualine\frequire\0", "config", "lualine.nvim")
+time([[Config for lualine.nvim]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+try_loadstring("\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
+time([[Config for gitsigns.nvim]], false)
 if should_profile then save_profiles() end
 
 end)
