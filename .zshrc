@@ -1,7 +1,7 @@
 ZSH_THEME="agnoster"
 
 # jump to vim config
-alias vic="cd && cd .config/nvim/ && vi init.vim"
+alias vic="cd && cd .config/nvim/ && vi init.lua"
 # remap nvim to vi / vim
 alias vim="nvim"
 alias vi="nvim"
