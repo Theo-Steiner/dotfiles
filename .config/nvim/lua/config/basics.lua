@@ -43,7 +43,7 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 
 -- paste over selected content no longer replaces clipboard
 -- && set clipboard to mac/windows system clipboard
-Map("v", "p", '"_dP', Noremap)
+Map("v", "p", '"_dP')
 Set.cb = "unnamed"
 
 -- hides 'No write since last change (add ! to override)' error
