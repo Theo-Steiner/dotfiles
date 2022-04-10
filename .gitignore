@@ -6,4 +6,6 @@
 /.config/*
 !.config/nvim
 !.config/nvim/**/*
+.config/nvim/plugin
+.config/nvim/plugin/*
 !.zshrc
