@@ -101,3 +101,6 @@ null_ls.setup({
 		end
 	end,
 })
+
+-- add .svelte filetype to plenary (for telescope highlighting)
+require("plenary.filetype").add_file("added")

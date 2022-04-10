@@ -8,8 +8,6 @@ return require("packer").startup(function()
 	-- Packer manages itself
 	use("wbthomason/packer.nvim")
 
-    use('lewis6991/impatient.nvim')
-
 	-- Language server setup with zero config
 	use({
 		"VonHeikemen/lsp-zero.nvim",
@@ -47,8 +45,9 @@ return require("packer").startup(function()
 	-- Dependencies for modern nvim plugins (for telescope, neo-tree, lualine etc)
 	use("kyazdani42/nvim-web-devicons")
 	use("nvim-lua/popup.nvim")
-	use("nvim-lua/plenary.nvim")
 	use("MunifTanjim/nui.nvim")
+	use("sharkdp/fd")
+	use("nvim-lua/plenary.nvim")
 
 	-- Trouble: better quickfixlists
 	use({

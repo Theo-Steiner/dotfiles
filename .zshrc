@@ -1,5 +1,7 @@
 # jump to vim config
 alias vic="cd && cd .config/nvim/ && vi init.lua"
+# jump to webdev directory
+alias dev="cd ~/WebDev"
 # remap nvim to vi / vim
 alias vim="nvim"
 alias vi="nvim"

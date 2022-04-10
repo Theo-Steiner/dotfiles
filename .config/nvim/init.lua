@@ -16,7 +16,6 @@ Reload = function()
 	dofile(vim.env.MYVIMRC)
 end
 
-require("impatient")
 require("config.basics")
 require("config.keybindings")
 require("config.appearance")
