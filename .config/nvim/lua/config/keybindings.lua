@@ -26,20 +26,27 @@ Map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>")
 Map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>")
 Map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>")
 Map("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<cr>")
-Map("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>")
+Map("n", "gr", "<cmd>TroubleToggle lsp_references<cr>")
 Map("n", "s", "<cmd>lua vim.lsp.buf.rename()<cr>")
 Map("n", "ga", "<cmd>lua vim.lsp.buf.code_action()<cr>")
 
 -- Diagnostics
 Map("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>")
-local next_diagnostic_or_trouble = function(forwards)
-	local trouble = require("trouble")
-	local is_trouble_open
+
+-- Function using buffernames to see if "Trouble" is open
+local check_trouble_state = function()
 	for _, buffer in ipairs(vim.api.nvim_list_bufs()) do
 		if string.match(vim.api.nvim_buf_get_name(buffer), "Trouble") then
-			is_trouble_open = true
+			return true
 		end
 	end
+	return false
+end
+
+local trouble = require("trouble")
+-- Step through diagnostic messages or trouble entries if there
+local next_diagnostic_or_trouble = function(forwards)
+	local is_trouble_open = check_trouble_state()
 	if is_trouble_open then
 		if forwards then
 			trouble.next({ skip_groups = true, jump = true })
@@ -62,4 +69,12 @@ Map("n", "<C-n>", function()
 end)
 
 -- Populate trouble with document diagnostics
-Map("n", "<C-t>", "<cmd>TroubleToggle document_diagnostics<cr>", { noremap = true })
+local close_or_open_with_diagnostics = function()
+	local is_trouble_open = check_trouble_state()
+	if is_trouble_open then
+		trouble.close()
+	else
+		vim.cmd([[TroubleToggle workspace_diagnostics]])
+	end
+end
+Map("n", "<C-t>", close_or_open_with_diagnostics, { noremap = true })
