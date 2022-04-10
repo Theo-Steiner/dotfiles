@@ -6,7 +6,7 @@ Map = function(...)
 	vim.keymap.set(...)
 end
 
--- reload lua modules
+-- helper function to reload lua modules
 Reload = function()
 	for name, _ in pairs(package.loaded) do
 		if name:match("^config") then
@@ -16,7 +16,9 @@ Reload = function()
 	dofile(vim.env.MYVIMRC)
 end
 
+require("impatient")
 require("config.basics")
 require("config.keybindings")
+require("config.appearance")
 require("config.packages")
 require("config.lsp")

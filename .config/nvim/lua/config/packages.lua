@@ -1,5 +1,5 @@
 -- ****************************************
--- ************** Packages *************
+-- *************** Packages ***************
 -- ****************************************
 
 vim.cmd([[packadd packer.nvim]])
@@ -7,6 +7,8 @@ vim.cmd([[packadd packer.nvim]])
 return require("packer").startup(function()
 	-- Packer manages itself
 	use("wbthomason/packer.nvim")
+
+    use('lewis6991/impatient.nvim')
 
 	-- Language server setup with zero config
 	use({
@@ -48,7 +50,7 @@ return require("packer").startup(function()
 	use("nvim-lua/plenary.nvim")
 	use("MunifTanjim/nui.nvim")
 
-	-- trouble
+	-- Trouble: better quickfixlists
 	use({
 		"folke/trouble.nvim",
 		config = function()
@@ -76,13 +78,7 @@ return require("packer").startup(function()
 		end,
 	})
 
-	use({
-		"dracula/vim",
-		config = function()
-			vim.cmd([[colorscheme dracula]])
-			vim.cmd([[hi Normal guibg=NONE ctermbg=NONE]])
-		end,
-	})
+	use("dracula/vim")
 
 	use({
 		"nvim-neo-tree/neo-tree.nvim",
