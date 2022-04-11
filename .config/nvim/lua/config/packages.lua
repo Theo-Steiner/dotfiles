@@ -63,21 +63,14 @@ return require("packer").startup(function()
 	use({
 		"nvim-telescope/telescope.nvim",
 		config = function()
-			local trouble = require("trouble.providers.telescope")
-			local telescope = require("telescope")
-
-			telescope.setup({
-				defaults = {
-					mappings = {
-						i = { ["<c-t>"] = trouble.open_with_trouble },
-						n = { ["<c-t>"] = trouble.open_with_trouble },
-					},
-				},
-			})
+			require("config._telescope")
 		end,
 	})
 
-	use("dracula/vim")
+	use({
+		"~/WebDev/warped.nvim",
+		requires = { "tjdevries/colorbuddy.nvim", "rktjmp/fwatch.nvim" },
+	})
 
 	use({
 		"nvim-neo-tree/neo-tree.nvim",
@@ -101,7 +94,7 @@ return require("packer").startup(function()
 	-- comment plugin... lol @tpope
 	use("tpope/vim-commentary")
 
-	-- Github Copilot (secrectly tpope too)
+	-- Github Copilot lua
 	use("github/copilot.vim")
 
 	-- Git signs

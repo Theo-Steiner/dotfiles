@@ -17,6 +17,8 @@ Map("", "<leader>c", ":Commentary<CR>")
 
 -- open file tree with <leader> pv
 Map("n", "<leader>pv", ":Neotree reveal toggle<cr>")
+-- open git status neotree float
+Map("n", "<leader>pg", ":Neotree float git_status<cr>")
 
 -- LSP actions
 -- show information about code at cursor position

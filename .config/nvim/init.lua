@@ -16,8 +16,9 @@ Reload = function()
 	dofile(vim.env.MYVIMRC)
 end
 
+-- load modules with configuration
 require("config.basics")
 require("config.keybindings")
-require("config.appearance")
 require("config.packages")
 require("config.lsp")
+require("config.appearance")
