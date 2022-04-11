@@ -16,5 +16,7 @@ alias ga="git add ."
 
 fpath=($fpath "/Users/theosteiner/.zfunctions")
 
+eval "$(luarocks --lua-version=5.1 path)"
+
 # remove username && machine from prompt
 prompt_context() {}
