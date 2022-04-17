@@ -15,9 +15,11 @@ Set.cursorline = true
 
 require("warped").setup()
 
-vim.cmd([[hi CursorLine guibg=NONE gui=bold]])
-vim.cmd([[hi Folded guibg=NONE guifg=#fefefe]])
-vim.cmd([[hi Normal guifg=NONE guibg=NONE]])
-vim.cmd([[hi VertSplit gui=NONE guibg=NONE]])
-vim.cmd([[hi LineNr guibg=NONE guifg=NONE]])
-vim.cmd([[hi SignColumn guibg=NONE]])
+vim.cmd([[
+    hi CursorLine guibg=NONE gui=bold
+    hi Folded guibg=NONE guifg=#fefefe
+    hi Normal guifg=NONE guibg=NONE
+    hi VertSplit gui=NONE guibg=NONE
+    hi LineNr guibg=NONE guifg=NONE
+    hi SignColumn guibg=NONE
+]])
