@@ -69,9 +69,9 @@ return require("packer").startup(function()
 
 	use({
 		"~/WebDev/warped.nvim",
-		requires = { "tjdevries/colorbuddy.nvim", "rktjmp/fwatch.nvim" },
+		requires = { "tjdevries/colorbuddy.nvim" },
 		config = function()
-            require("config._warped")
+			require("config._warped")
 		end,
 	})
 
