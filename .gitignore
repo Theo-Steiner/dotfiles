@@ -9,3 +9,4 @@
 .config/nvim/plugin
 .config/nvim/plugin/*
 !.zshrc
+!.eslintrc.json
