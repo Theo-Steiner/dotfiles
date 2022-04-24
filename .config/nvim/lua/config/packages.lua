@@ -108,6 +108,13 @@ return require("packer").startup(function()
 		end,
 	})
 
+	use({
+		"norcalli/nvim-colorizer.lua",
+		config = function()
+			require("colorizer").setup()
+		end,
+	})
+
 	-- statusline
 	use({
 		"nvim-lualine/lualine.nvim",
