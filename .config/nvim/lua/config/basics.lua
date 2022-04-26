@@ -48,6 +48,3 @@ Set.cb = "unnamed"
 
 -- hides 'No write since last change (add ! to override)' error
 Set.hidden = true
-
--- automatically set cwd
-Set.autochdir = true
