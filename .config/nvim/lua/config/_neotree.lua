@@ -17,6 +17,11 @@ require("neo-tree").setup({
 		hijack_netrw_behavior = "open_current",
 		filtered_items = {
 			hide_gitignored = false,
+			hide_by_name = {
+				".DS_Store",
+				"thumbs.db",
+				"node_modules",
+			},
 		},
 	},
 })
