@@ -18,7 +18,8 @@ local default_servers = {
 	tsserver = true,
 	svelte = true,
 	jsonls = true,
-	sumneko_lua = false,
+	-- for now, the default config is not respected, so lua formatting is handled with stylua
+	sumneko_lua = true,
 }
 
 -- ensure they are installed
@@ -39,6 +40,10 @@ for servername, native_formatting_disabled in pairs(default_servers) do
 		table.insert(runtime_path, "lua/?/init.lua")
 		additional_config = {
 			Lua = {
+				format = {
+					enable = true,
+					defaultConfig = { indent_style = "tab", indent_size = 4 },
+				},
 				diagnostics = {
 					globals = { "vim", "use" },
 				},

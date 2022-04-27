@@ -40,6 +40,7 @@ local eslint = generate_source_with_fallback("eslint", null_ls.builtins.diagnost
 
 null_ls.setup({
 	sources = {
+		-- TODO: swap this for sumneko lua native formatter once sumneko/lua-language-server/issues/1068 is resolved
 		null_ls.builtins.formatting.stylua,
 		prettier,
 		eslint,
