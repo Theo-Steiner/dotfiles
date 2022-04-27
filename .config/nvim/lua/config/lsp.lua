@@ -11,3 +11,7 @@ require("config._null-ls")
 
 -- add .svelte filetype to plenary (for telescope highlighting)
 require("plenary.filetype").add_file("added")
+
+-- add global to track if auto formatting is enabled
+vim.g.AutoFormattingEnabled = true
+vim.cmd([[command! Formatting lua vim.g.AutoFormattingEnabled = not vim.g.AutoFormattingEnabled]])

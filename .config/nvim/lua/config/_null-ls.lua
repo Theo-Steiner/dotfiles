@@ -54,10 +54,12 @@ null_ls.setup({
 				group = "LspFormatting",
 				buffer = vim.api.nvim_win_get_buf(0),
 				callback = function()
-					-- use formatting with the lsp that has the capabilities (normally only null-ls)
-					vim.lsp.buf.formatting_sync()
-					-- keep gitsigns in sync after formatting
-					gitsigns.refresh()
+					if vim.g.AutoFormattingEnabled then
+						-- use formatting with the lsp that has the capabilities (normally only null-ls)
+						vim.lsp.buf.formatting_sync()
+						-- keep gitsigns in sync after formatting
+						gitsigns.refresh()
+					end
 				end,
 			})
 		end
