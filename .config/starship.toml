@@ -1,0 +1,10 @@
+[git_branch]
+ignore_branches = ["dotfiles", "lua-config"]
+[git_status]
+format = '( [$conflicted](fg:red)[$untracked](fg:green)[$renamed](fg:yellow)[$modified](fg:yellow)[$deleted](fg:red)[$ahead_behind ]($style))'
+style = 'blue'
+conflicted = "≄ "
+untracked = " $count "
+modified = " $count "
+renamed = " $count "
+deleted = " $count "

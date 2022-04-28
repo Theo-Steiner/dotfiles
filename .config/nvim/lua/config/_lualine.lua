@@ -63,5 +63,17 @@ require("lualine").setup({
 				fmt = format_path,
 			},
 		},
+		lualine_y = {
+			{
+				"formatting",
+				color = {
+					gui = "bold",
+					fg = utils.extract_color_from_hllist("fg", { "Special", "Boolean", "Constant" }, "#000000"),
+				},
+				fmt = function()
+					return vim.g.AutoFormattingEnabled and "" or ""
+				end,
+			},
+		},
 	},
 })

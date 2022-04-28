@@ -12,9 +12,8 @@ vim.g.copilot_no_tab_map = true
 vim.g.copilot_assume_mapped = true
 vim.g.copilot_tab_fallback = ""
 return cmp.mapping(function(fallback)
-	print("hello")
 	local copilot_keys = vim.fn["copilot#Accept"]()
-	if copilot_keys then
+	if copilot_keys ~= "" then
 		vim.api.nvim_feedkeys(copilot_keys, "i", true)
 	elseif cmp.visible() then
 		cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })

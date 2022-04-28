@@ -37,7 +37,7 @@ vim.api.nvim_create_autocmd({ "BufWinLeave" }, {
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 	pattern = { "*.*" },
 	callback = function()
-		vim.cmd([[silent loadview]])
+		vim.cmd([[silent! loadview]])
 	end,
 })
 
@@ -48,6 +48,3 @@ Set.cb = "unnamed"
 
 -- hides 'No write since last change (add ! to override)' error
 Set.hidden = true
-
--- automatically set cwd
-Set.autochdir = true

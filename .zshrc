@@ -8,15 +8,20 @@ alias vi="nvim"
 # keep the old guy around
 alias oldvim="\vim"
 
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
+
 gc() {
     git commit -m "$1"
 }
 
-alias ga="git add ."
+ga() {
+    git add "$1"
+}
 
-fpath=($fpath "/Users/theosteiner/.zfunctions")
-
-eval "$(luarocks --lua-version=5.1 path)"
-
-# remove username && machine from prompt
-prompt_context() {}
+# starship shell
+eval "$(starship init zsh)"

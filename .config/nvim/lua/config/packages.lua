@@ -69,7 +69,10 @@ return require("packer").startup(function()
 
 	use({
 		"~/WebDev/warped.nvim",
-		requires = { "tjdevries/colorbuddy.nvim", "rktjmp/fwatch.nvim" },
+		requires = { "tjdevries/colorbuddy.nvim" },
+		config = function()
+			require("config._warped")
+		end,
 	})
 
 	use({
@@ -102,6 +105,13 @@ return require("packer").startup(function()
 		"lewis6991/gitsigns.nvim",
 		config = function()
 			require("gitsigns").setup()
+		end,
+	})
+
+	use({
+		"norcalli/nvim-colorizer.lua",
+		config = function()
+			require("colorizer").setup()
 		end,
 	})
 
