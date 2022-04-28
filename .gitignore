@@ -4,8 +4,10 @@
 !/.warp
 !/.warp/**/*
 /.config/*
+!.config/starship.toml
 !.config/nvim
 !.config/nvim/**/*
+.config/nvim/plugin
 .config/nvim/plugin
 .config/nvim/plugin/*
 !.zshrc

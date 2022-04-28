@@ -22,3 +22,6 @@ gc() {
 ga() {
     git add "$1"
 }
+
+# starship shell
+eval "$(starship init zsh)"
