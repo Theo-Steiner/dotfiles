@@ -1,5 +1,10 @@
+format = "$character $all"
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[➜](bold red)"
 [git_branch]
-ignore_branches = ["dotfiles", "lua-config"]
+# makes sure the dotfiles repository is ignored
+ignore_branches = ["dotfiles"]
 [git_status]
 format = '( [$conflicted](fg:red)[$untracked](fg:green)[$renamed](fg:yellow)[$modified](fg:yellow)[$deleted](fg:red)[$ahead_behind ]($style))'
 style = 'blue'
