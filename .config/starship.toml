@@ -13,3 +13,5 @@ untracked = " $count "
 modified = " $count "
 renamed = " $count "
 deleted = " $count "
+[cmd_duration]
+format = "for [$duration]($style) "
