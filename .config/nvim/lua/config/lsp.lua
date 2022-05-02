@@ -15,3 +15,4 @@ require("plenary.filetype").add_file("added")
 -- add global to track if auto formatting is enabled
 vim.g.AutoFormattingEnabled = true
 vim.cmd([[command! Formatting lua vim.g.AutoFormattingEnabled = not vim.g.AutoFormattingEnabled]])
+vim.cmd([[command! Format lua vim.lsp.buf.formatting_sync()]])
