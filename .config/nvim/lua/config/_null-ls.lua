@@ -1,14 +1,22 @@
 local null_ls = require("null-ls")
 local gitsigns = require("gitsigns")
 
-local generate_source_with_fallback = function(source_command, source_generator, additional_config)
+local generate_source_with_fallback = function(source_command, source_generator, config, additional_args)
+	config = config or {}
 	local utils = require("null-ls.utils").make_conditional_utils()
 	local project_local_bin = "node_modules/.bin/" .. source_command
 
-	return source_generator({
-		unpack(additional_config),
-		command = utils.root_has_file(project_local_bin) and project_local_bin or source_command,
-	})
+	local command = utils.root_has_file(project_local_bin) and project_local_bin or source_command
+	config["command"] = command
+	local h = require("null-ls.helpers")
+	-- TODO: once prettier implements a new algorithm for searching for plugins,
+	-- the below code can be removed
+	config["args"] = h.range_formatting_args_factory({
+		additional_args,
+		"--stdin-filepath",
+		"$FILENAME",
+	}, "--range-start", "--range-end", { row_offset = -1, col_offset = -1 })
+	return source_generator(config)
 end
 
 -- use local prettier if available, otherwise fall back to global
@@ -31,7 +39,9 @@ local prettier = generate_source_with_fallback("prettier", null_ls.builtins.form
 		"graphql",
 		"handlebars",
 	},
-})
+	-- TODO: prettier plugin not found with pnpm, unless below line included
+	-- upstream issue: prettier/prettier/pull/11248
+}, "--plugin-search-dir=.")
 
 -- use local eslint if available, otherwise fall back to global
 local eslint = generate_source_with_fallback("eslint", null_ls.builtins.diagnostics.eslint.with, {
