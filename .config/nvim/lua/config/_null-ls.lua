@@ -8,14 +8,8 @@ local generate_source_with_fallback = function(source_command, source_generator,
 
 	local command = utils.root_has_file(project_local_bin) and project_local_bin or source_command
 	config["command"] = command
-	local h = require("null-ls.helpers")
-	-- TODO: once prettier implements a new algorithm for searching for plugins,
-	-- the below code can be removed
-	config["args"] = h.range_formatting_args_factory({
-		additional_args,
-		"--stdin-filepath",
-		"$FILENAME",
-	}, "--range-start", "--range-end", { row_offset = -1, col_offset = -1 })
+	-- TODO: once prettier implements a new algorithm for searching for plugins, its extra args no longer have to be passed
+	config["extra_args"] = additional_args
 	return source_generator(config)
 end
 
@@ -41,7 +35,7 @@ local prettier = generate_source_with_fallback("prettier", null_ls.builtins.form
 	},
 	-- TODO: prettier plugin not found with pnpm, unless below line included
 	-- upstream issue: prettier/prettier/pull/11248
-}, "--plugin-search-dir=.")
+}, { "--plugin-search-dir=." })
 
 -- use local eslint if available, otherwise fall back to global
 local eslint = generate_source_with_fallback("eslint", null_ls.builtins.diagnostics.eslint.with, {
