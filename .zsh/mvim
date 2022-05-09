@@ -1,0 +1,9 @@
+# this is merely a wrapper about neovim-remote, but intentionally called "mvim", 
+# so that yyx990803/launch-editor (used in vite-plugin-svelte's inspector) passes it args that specify a cursor position
+#   --remote [+{cmd}] {file} ...					*--remote*
+# Vim allows one init command: +{cmd}.
+# This must be an Ex command that can be
+# followed by "|". It's not yet supported by
+# Nvim. 
+# TODO: => SWITCH ONCE THIS FEATURE IS ENABLED NATIVELY IN NEOVIM
+nvim --remote "$@"

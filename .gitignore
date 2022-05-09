@@ -11,4 +11,6 @@
 .config/nvim/plugin
 .config/nvim/plugin/*
 !.zshrc
+!.zsh
+!.zsh/**/*
 !.eslintrc.json

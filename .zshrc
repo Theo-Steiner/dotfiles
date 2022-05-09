@@ -1,3 +1,7 @@
+# extend path with my custom scripts
+path+=(~/.zsh)
+export path
+
 # jump to vim config
 alias vic="cd && cd .config/nvim/ && vi init.lua"
 # jump to webdev directory
@@ -7,6 +11,13 @@ alias vim="nvim"
 alias vi="nvim"
 # keep the old guy around
 alias oldvim="\vim"
+
+# set visual editor to "mvim" (which is not mvim but just a wrapper around nvr - neovim remote with the --remote flag)
+export VISUAL="mvim"
+# "hostvim" is a wrapper around nvim that listens to neovim-remote's standard server
+hvim() {
+    nvim --listen /tmp/nvimsocket "$@"
+}
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
