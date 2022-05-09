@@ -26,6 +26,12 @@ else
   export EDITOR='nvim'
 fi
 
+alias oldnpm="\npm"
+warnnpm() {
+    echo 'Use pnpm instead. If you really have to: oldnpm'
+}
+alias npm="warnnpm"
+
 gc() {
     git commit -m "$1"
 }
@@ -36,3 +42,6 @@ ga() {
 
 # starship shell
 eval "$(starship init zsh)"
+
+export PNPM_HOME="/Users/theosteiner/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
