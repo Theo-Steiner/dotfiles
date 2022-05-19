@@ -6,4 +6,4 @@
 # followed by "|". It's not yet supported by
 # Nvim. 
 # TODO: => SWITCH ONCE THIS FEATURE IS ENABLED NATIVELY IN NEOVIM
-nvim --remote "$@"
+nvr --remote "$@"

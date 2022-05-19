@@ -12,6 +12,8 @@ alias vi="nvim"
 # keep the old guy around
 alias oldvim="\vim"
 
+export CUSTOM_EDITOR="launch_editor"
+
 # set visual editor to "mvim" (which is not mvim but just a wrapper around nvr - neovim remote with the --remote flag)
 export VISUAL="mvim"
 # "hostvim" is a wrapper around nvim that listens to neovim-remote's standard server
