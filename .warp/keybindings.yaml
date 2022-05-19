@@ -1,5 +1,7 @@
 ---
-"workspace:show_theme_chooser": cmd-s
 "terminal:clear_lines": shift-cmd-_
-"editor_view:insert_autosuggestion_text_and_update_selection": ctrl-enter
 "editor_view:accept_autosuggestion": shift-tab
+"workspace:show_theme_chooser": cmd-s
+"editor_view:insert_newline": ctrl-f
+"editor_view:insert_autosuggestion_text_and_update_selection": ctrl-enter
+"editor_view:right": ctrl-j

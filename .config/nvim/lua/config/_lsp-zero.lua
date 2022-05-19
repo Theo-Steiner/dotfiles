@@ -61,9 +61,6 @@ for servername, native_formatting_disabled in pairs(default_servers) do
 		{ on_attach = native_formatting_disabled and disable_formatting, settings = additional_config }
 	)
 end
--- add github copilot to default sources
-local cmp_mapping = lsp_zero.defaults.cmp_mappings()
-cmp_mapping["<Tab>"] = require("config._copilot")
 -- icons to display alongside completion items
 local kind_icons = {
 	Text = "",
@@ -93,7 +90,6 @@ local kind_icons = {
 	TypeParameter = "",
 }
 lsp_zero.setup_nvim_cmp({
-	mapping = cmp_mapping,
 	view = { entries = "native" },
 	formatting = {
 		format = function(_, vim_item)
