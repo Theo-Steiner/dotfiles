@@ -18,4 +18,5 @@ require("config._copilot")
 -- add global to track if auto formatting is enabled
 vim.g.AutoFormattingEnabled = true
 vim.cmd([[command! Formatting lua vim.g.AutoFormattingEnabled = not vim.g.AutoFormattingEnabled]])
+vim.cmd([[command! Fmt lua vim.lsp.buf.formatting_sync()]])
 vim.cmd([[command! Format lua vim.lsp.buf.formatting_sync()]])
