@@ -9,6 +9,7 @@ require("nvim-treesitter.configs").setup({
 		additional_vim_regex_highlighting = false,
 	},
 	indent = {
-		enable = true,
+		-- this indentation currently over indents after closing a tag
+		enable = false,
 	},
 })
