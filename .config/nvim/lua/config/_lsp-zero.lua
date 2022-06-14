@@ -18,8 +18,7 @@ local default_servers = {
 	tsserver = true,
 	svelte = true,
 	jsonls = true,
-	-- for now, the default config is not respected, so lua formatting is handled with stylua
-	sumneko_lua = true,
+	sumneko_lua = false,
 }
 
 -- ensure they are installed

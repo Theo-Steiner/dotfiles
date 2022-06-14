@@ -44,8 +44,6 @@ local eslint = generate_source_with_fallback("eslint", null_ls.builtins.diagnost
 
 null_ls.setup({
 	sources = {
-		-- TODO: swap this for sumneko lua native formatter once sumneko/lua-language-server/issues/1068 is resolved
-		null_ls.builtins.formatting.stylua,
 		null_ls.builtins.formatting.black,
 		prettier,
 		eslint,
@@ -60,7 +58,7 @@ null_ls.setup({
 				buffer = vim.api.nvim_win_get_buf(0),
 				callback = function()
 					if vim.g.AutoFormattingEnabled then
-						-- use formatting with the lsp that has the capabilities (normally only null-ls)
+						-- use formatting with the lsp that has the capabilities (either null-lsor lsp itself)
 						vim.lsp.buf.formatting_sync()
 						-- keep gitsigns in sync after formatting
 						gitsigns.refresh()

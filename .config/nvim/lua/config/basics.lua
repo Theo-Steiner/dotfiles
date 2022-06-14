@@ -9,7 +9,7 @@ Set.encoding = "UTF-8"
 Set.tabstop = 4
 Set.softtabstop = 4
 Set.shiftwidth = 4
-Set.expandtab = true
+Set.expandtab = false
 Set.smartindent = true
 
 -- scroll screen 8 lines before the cursor hits the edge
