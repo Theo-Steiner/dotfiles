@@ -42,6 +42,9 @@ local eslint = generate_source_with_fallback("eslint", null_ls.builtins.diagnost
 	filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte" },
 })
 
+-- augroup for formatting
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
 null_ls.setup({
 	sources = {
 		null_ls.builtins.formatting.black,
@@ -49,20 +52,17 @@ null_ls.setup({
 		eslint,
 		null_ls.builtins.code_actions.gitsigns,
 	},
-	-- on attaching, create an autogroup for formatting on save
-	on_attach = function(client)
-		if client.resolved_capabilities.document_formatting then
-			vim.api.nvim_create_augroup("LspFormatting", { clear = true })
-			vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-				group = "LspFormatting",
-				buffer = vim.api.nvim_win_get_buf(0),
+	on_attach = function(client, bufnr)
+		if client.supports_method("textDocument/formatting") then
+			vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				group = augroup,
+				buffer = bufnr,
 				callback = function()
-					if vim.g.AutoFormattingEnabled then
-						-- use formatting with the lsp that has the capabilities (either null-lsor lsp itself)
-						vim.lsp.buf.formatting_sync()
-						-- keep gitsigns in sync after formatting
-						gitsigns.refresh()
-					end
+		-- 			-- TODO: on 0.8 => vim.lsp.buf.format({ bufnr = bufnr }) instead
+					vim.lsp.buf.formatting_sync()
+		-- 			-- keep gitsigns in sync after formatting
+					gitsigns.refresh()
 				end,
 			})
 		end
