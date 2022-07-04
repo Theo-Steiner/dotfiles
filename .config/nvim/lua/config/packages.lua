@@ -97,6 +97,9 @@ return require("packer").startup(function()
 	-- comment plugin... lol @tpope
 	use("tpope/vim-commentary")
 
+	-- get correct commentstring before commenting (configured in _treesitter.lua)
+	use("JoosepAlviste/nvim-ts-context-commentstring")
+
 	-- Github Copilot lua
 	use("github/copilot.vim")
 

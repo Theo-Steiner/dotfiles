@@ -1,5 +1,5 @@
 require("nvim-treesitter.configs").setup({
-	ensure_installed = "all",
+	ensure_installed = "maintained",
 	ignore_install = { "phpdoc" },
 
 	sync_install = false,
@@ -12,4 +12,7 @@ require("nvim-treesitter.configs").setup({
 		-- this indentation currently over indents after closing a tag
 		enable = false,
 	},
+	context_commentstring = {
+		enable = true
+	}
 })
