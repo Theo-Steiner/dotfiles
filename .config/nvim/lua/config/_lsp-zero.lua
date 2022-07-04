@@ -44,7 +44,7 @@ for servername, native_formatting_disabled in pairs(default_servers) do
 					defaultConfig = { indent_style = "tab", indent_size = 4 },
 				},
 				diagnostics = {
-					globals = { "vim", "use" },
+					globals = { "vim", "use", "AUTO_FORMAT" },
 				},
 				runtime = { version = "LuaJIT", path = runtime_path },
 				workspace = {
@@ -57,7 +57,7 @@ for servername, native_formatting_disabled in pairs(default_servers) do
 	end
 	lsp_zero.configure(
 		servername,
-		{ on_attach = native_formatting_disabled and disable_formatting, settings = additional_config }
+		{ on_attach = native_formatting_disabled and disable_formatting or AUTO_FORMAT, settings = additional_config }
 	)
 end
 -- icons to display alongside completion items
