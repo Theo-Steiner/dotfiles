@@ -12,6 +12,13 @@ Map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
 -- use <leader> fg to open live_grep in preview window
 Map("n", "<leader>fs", "<cmd>Telescope git_status<cr>")
 
+-- <space> c toggles the current line or current selection to be a comment
+Map("", "<leader>c", function()
+	require('ts_context_commentstring.internal').update_commentstring()
+	vim.api.nvim_command('Commentary')
+end
+)
+
 -- open file tree with <leader> pv
 Map("n", "<leader>pv", ":Neotree reveal toggle<cr>")
 -- open git status neotree float
