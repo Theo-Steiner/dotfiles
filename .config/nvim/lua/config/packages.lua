@@ -111,6 +111,16 @@ return require("packer").startup(function()
 		end,
 	})
 
+	-- jump through files
+	use({
+		"ThePrimeagen/harpoon",
+		requires = { "nvim-lua/plenary.nvim" },
+		config = function()
+			vim.g.harpoon_log_level = 'trace'
+			require("config._harpoon")
+		end,
+	})
+
 	use({
 		"norcalli/nvim-colorizer.lua",
 		config = function()
