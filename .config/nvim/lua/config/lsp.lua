@@ -48,3 +48,22 @@ require("plenary.filetype").add_file("added")
 
 -- add custom keybinding for copilot
 require("config._copilot")
+
+-- ****************************************
+-- ************** Keybindings *************
+-- ****************************************
+
+-- LSP actions
+-- show information about code at cursor position
+Map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>")
+--
+Map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>")
+Map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>")
+Map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>")
+Map("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<cr>")
+Map("n", "gr", "<cmd>TroubleToggle lsp_references<cr>")
+Map("n", "s", "<cmd>lua vim.lsp.buf.rename()<cr>")
+Map("n", "ga", "<cmd>lua vim.lsp.buf.code_action()<cr>")
+
+-- Diagnostics
+Map("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>")
