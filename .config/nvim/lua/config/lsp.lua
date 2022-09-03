@@ -43,9 +43,6 @@ require("config._lsp-zero")
 -- like prettier/eslint to hook into nvim's lsp-service
 require("config._null-ls")
 
--- add .svelte filetype to plenary (for telescope highlighting)
-require("plenary.filetype").add_file("added")
-
 -- add custom keybinding for copilot
 require("config._copilot")
 

@@ -1,5 +1,0 @@
-return {
-	extension = {
-		["svelte"] = "svelte",
-	}
-}

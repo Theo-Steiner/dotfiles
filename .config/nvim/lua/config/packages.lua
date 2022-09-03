@@ -47,6 +47,7 @@ return require("packer").startup(function()
 	use("nvim-lua/popup.nvim")
 	use("MunifTanjim/nui.nvim")
 	use("sharkdp/fd")
+
 	use("nvim-lua/plenary.nvim")
 
 	-- Trouble: better quickfixlists
@@ -62,6 +63,7 @@ return require("packer").startup(function()
 	-- telescope fuzzy finder <space> ff to FindFiles and <space> fg to LiveGrep
 	use({
 		"nvim-telescope/telescope.nvim",
+		requires = { 'nvim-lua/plenary.nvim', 'nvim-treesitter/nvim-treesitter' },
 		config = function()
 			require("config._telescope")
 		end,
