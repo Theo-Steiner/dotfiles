@@ -101,7 +101,7 @@ return require("packer").startup(function()
 	use("JoosepAlviste/nvim-ts-context-commentstring")
 
 	-- Github Copilot lua
-	use("github/copilot.vim")
+	-- use("github/copilot.vim")
 
 	-- Git signs
 	use({
@@ -116,7 +116,6 @@ return require("packer").startup(function()
 		"ThePrimeagen/harpoon",
 		requires = { "nvim-lua/plenary.nvim" },
 		config = function()
-			vim.g.harpoon_log_level = 'trace'
 			require("config._harpoon")
 		end,
 	})
