@@ -28,6 +28,9 @@ require("warped").setup({
 		Group.new("TelescopePreviewTitle", colors.none, colors.none)
 		Group.new("TelescopePreviewBorder", colors.none, lighter)
 		Group.new("TelescopePreviewNormal", colors.none, darker)
+
+		-- TreesitterContext current code block highlighting
+		Group.new("TreesitterContext", colors.none, darker, styles.bold)
 	end,
 	mapping = mapping,
 })

@@ -42,6 +42,9 @@ return require("packer").startup(function()
 		end,
 	})
 
+	-- treesitter context shows current block at the very top
+	use 'nvim-treesitter/nvim-treesitter-context'
+
 	-- Dependencies for modern nvim plugins (for telescope, neo-tree, lualine etc)
 	use("kyazdani42/nvim-web-devicons")
 	use("nvim-lua/popup.nvim")
