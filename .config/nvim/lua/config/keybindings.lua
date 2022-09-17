@@ -5,24 +5,20 @@
 -- source vim config with <leader> enter
 Map("n", "<leader><CR>", "<cmd>lua Reload()<cr>")
 
--- use <leader> ff to open fuzzy finder preview to find file in project
-Map("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
--- use <leader> fg to open live_grep in preview window
-Map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
--- use <leader> fg to open live_grep in preview window
-Map("n", "<leader>fs", "<cmd>Telescope git_status<cr>")
+-- use <leader> f to open fuzzy finder preview to find file in project
+Map("n", "<leader>f", "<cmd>Telescope find_files<cr>")
+-- use <leader> f to open fuzzy finder preview to live-grep in project
+Map("n", "<leader>g", "<cmd>Telescope live_grep<cr>")
 
--- <space> c toggles the current line or current selection to be a comment
+-- <leader> c toggles the current line or current selection to be a comment
 Map("", "<leader>c", function()
 	require('ts_context_commentstring.internal').update_commentstring()
 	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(":Commentary<CR>", true, false, true), "", false)
 end
 )
 
--- open file tree with <leader> pv
-Map("n", "<leader>pv", ":Neotree reveal toggle<cr>")
--- open git status neotree float
-Map("n", "<leader>pg", ":Neotree float git_status<cr>")
+-- open file tree witvh <leader> p
+Map("n", "<leader>p", ":Neotree reveal toggle<cr>")
 
 
 -- Function using buffernames to see if "Trouble" is open
