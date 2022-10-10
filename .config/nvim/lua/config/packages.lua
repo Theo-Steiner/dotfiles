@@ -96,6 +96,11 @@ return require("packer").startup(function()
 		end,
 	})
 
+	use {
+		"windwp/nvim-autopairs",
+		config = function() require("nvim-autopairs").setup {} end
+	}
+
 	-- legendary git plugin
 	use("tpope/vim-fugitive")
 
