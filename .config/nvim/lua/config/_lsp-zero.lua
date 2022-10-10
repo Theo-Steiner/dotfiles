@@ -17,6 +17,7 @@ local default_servers = {
 	cssls = true,
 	tsserver = true,
 	svelte = true,
+	volar = true,
 	jsonls = true,
 	sumneko_lua = false,
 }
