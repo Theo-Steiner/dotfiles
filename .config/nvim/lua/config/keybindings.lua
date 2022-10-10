@@ -6,9 +6,9 @@
 Map("n", "<leader><CR>", "<cmd>lua Reload()<cr>")
 
 -- use <leader> f to open fuzzy finder preview to find file in project
-Map("n", "<leader>f", "<cmd>Telescope find_files<cr>")
+Map("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
 -- use <leader> f to open fuzzy finder preview to live-grep in project
-Map("n", "<leader>g", "<cmd>Telescope live_grep<cr>")
+Map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
 
 -- <leader> c toggles the current line or current selection to be a comment
 Map("", "<leader>c", function()
@@ -18,7 +18,7 @@ end
 )
 
 -- open file tree witvh <leader> p
-Map("n", "<leader>p", ":Neotree reveal toggle<cr>")
+Map("n", "<leader>pv", ":Neotree reveal toggle<cr>")
 
 
 -- Function using buffernames to see if "Trouble" is open
