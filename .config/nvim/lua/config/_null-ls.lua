@@ -8,6 +8,7 @@ local generate_source_with_fallback = function(source_command, source_generator,
 	local command = utils.root_has_file(project_local_bin) and project_local_bin or source_command
 	config["command"] = command
 	-- TODO: once prettier implements a new algorithm for searching for plugins, its extra args no longer have to be passed
+	-- This doesn't work in combination with only_local however, so turning of global prettier using :Formatting is necessary for now
 	config["extra_args"] = additional_args
 	return source_generator(config)
 end
@@ -36,9 +37,10 @@ local prettier = generate_source_with_fallback("prettier", null_ls.builtins.form
 	-- upstream issue: prettier/prettier/pull/11248
 }, { "--plugin-search-dir=." })
 
--- use local eslint if available, otherwise fall back to global
-local eslint = generate_source_with_fallback("eslint", null_ls.builtins.diagnostics.eslint.with, {
-	filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte" },
+-- use only local eslint
+local eslint = null_ls.builtins.diagnostics.eslint.with({
+	only_local = "node_modules/.bin",
+	filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte" }
 })
 
 null_ls.setup({
