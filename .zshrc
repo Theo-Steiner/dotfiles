@@ -28,12 +28,6 @@ else
   export EDITOR='nvim'
 fi
 
-alias oldnpm="\npm"
-warnnpm() {
-    echo 'Use pnpm instead. If you really have to: oldnpm'
-}
-alias npm="warnnpm"
-
 gc() {
     git commit -m "$1"
 }
